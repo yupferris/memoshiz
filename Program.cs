@@ -30,16 +30,38 @@ namespace MemoShiz
                     }
                     Console.WriteLine();
                 }
-                Console.WriteLine();
 
+                Console.WriteLine();
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
 
                 Console.Clear();
                 for (int i = 0; i < numSequences; i++)
                 {
+                    bool win = true;
                     for (int j = 0; j < sequenceLength; j++)
                     {
+                        char c;
+                        do
+                        {
+                            c = Char.ToUpper(Console.ReadKey().KeyChar);
+                        }
+                        while (c == ' ');
+                        var expected = sequences[i, j];
+                        if (c != expected)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Wrong :( Should have been: " + expected);
+                            win = false;
+                            break;
+                        }
                     }
+                    if (!win)
+                        continue;
+
+                    Console.WriteLine();
+                    Console.WriteLine("Correct :D:D:D");
+                    Console.WriteLine();
                 }
             }
             catch (Exception e)
