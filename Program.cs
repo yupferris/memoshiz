@@ -12,6 +12,10 @@ namespace MemoShiz
         {
             try
             {
+                Console.WriteLine("Press any key to start...");
+                Console.ReadKey();
+                Console.Clear();
+
                 int numSequences = int.Parse(args[0]);
                 int sequenceLength = int.Parse(args[1]);
 
@@ -34,8 +38,10 @@ namespace MemoShiz
                 Console.WriteLine();
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
-
                 Console.Clear();
+
+                var startTime = DateTime.Now;
+
                 for (int i = 0; i < numSequences; i++)
                 {
                     bool win = true;
@@ -63,6 +69,8 @@ namespace MemoShiz
                     Console.WriteLine("Correct :D:D:D");
                     Console.WriteLine();
                 }
+
+                Console.WriteLine("Time spent: " + DateTime.Now.Subtract(startTime).TotalSeconds + "s");
             }
             catch (Exception e)
             {
