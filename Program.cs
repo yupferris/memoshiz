@@ -73,9 +73,8 @@ namespace MemoShiz
                     Console.WriteLine();
                 }
 
-                var stoppedTime = DateTime.Now;
-                Console.WriteLine("Memo time: " + stoppedTime.Subtract(memoStartTime).TotalSeconds + "s");
-                Console.WriteLine("Exec time: " + stoppedTime.Subtract(execStartTime).TotalSeconds + "s");
+                Console.WriteLine("Memo time: " + execStartTime.Subtract(memoStartTime).TotalSeconds + "s");
+                Console.WriteLine("Exec time: " + DateTime.Now.Subtract(execStartTime).TotalSeconds + "s");
             }
             catch (Exception e)
             {
