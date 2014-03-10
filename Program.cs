@@ -37,10 +37,13 @@ namespace MemoShiz
 
                 Console.WriteLine();
                 Console.WriteLine("Press any key to continue...");
+
+                var memoStartTime = DateTime.Now;
+
                 Console.ReadKey();
                 Console.Clear();
 
-                var startTime = DateTime.Now;
+                var execStartTime = DateTime.Now;
 
                 for (int i = 0; i < numSequences; i++)
                 {
@@ -70,7 +73,9 @@ namespace MemoShiz
                     Console.WriteLine();
                 }
 
-                Console.WriteLine("Time spent: " + DateTime.Now.Subtract(startTime).TotalSeconds + "s");
+                var stoppedTime = DateTime.Now;
+                Console.WriteLine("Memo time: " + stoppedTime.Subtract(memoStartTime).TotalSeconds + "s");
+                Console.WriteLine("Exec time: " + stoppedTime.Subtract(execStartTime).TotalSeconds + "s");
             }
             catch (Exception e)
             {
