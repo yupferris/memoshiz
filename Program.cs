@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MemoShiz
@@ -16,18 +17,26 @@ namespace MemoShiz
                 Console.ReadKey();
                 Console.Clear();
 
+				// TODO: This sucks
                 int numSequences = int.Parse(args[0]);
                 int sequenceLength = int.Parse(args[1]);
+				bool excludeYZ = bool.Parse(args[2]);
+				bool excludePairs = bool.Parse(args[3]);
 
-                var sequences = new char[numSequences, sequenceLength];
+				var sequences = new char[numSequences, sequenceLength];
 
                 var r = new Random();
                 for (int i = 0; i < numSequences; i++)
                 {
+					char lastChar = '\0';
                     for (int j = 0; j < sequenceLength; j++)
                     {
-                        var c = (char)('A' + r.Next(26));
-                        sequences[i, j] = c;
+						char c;
+						do
+						{
+							c = (char)('A' + r.Next(excludeYZ ? 24 : 26));
+						} while (excludePairs && c == lastChar);
+                        sequences[i, j] = lastChar = c;
                         Console.Write(c);
                         if ((j & 1) != 0)
                             Console.Write(' ');
@@ -61,6 +70,7 @@ namespace MemoShiz
                         {
                             Console.WriteLine();
                             Console.WriteLine("Wrong :( Should have been: " + expected);
+							Thread.Sleep(1000);
                             win = false;
                             break;
                         }
